@@ -11,9 +11,27 @@ class CounterScreen extends StatelessWidget {
       appBar: AppBar(
           title: const Text('Counter APP')
       ),
-      body: BlocBuilder<CounterCubit, CounterState>(
+      body: BlocConsumer<CounterCubit, CounterState>(
+        listener: (context, state) {
+          // TODO: implement listener
+          if(state.incremented == true){
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                  content: Text('Incremented!'),
+                duration: Duration(microseconds: 300),
+              )
+            );
+          }else if(state.incremented == false){
+            ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Decremented!'),
+                  duration: Duration(microseconds: 300),
+                )
+            );
+          }
+        },
         builder: (context, state) {
-          var counter=CounterCubit.get(context);
+          var counter = CounterCubit.get(context);
           return Center(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -25,7 +43,10 @@ class CounterScreen extends StatelessWidget {
                   tooltip: 'Decrement',
                   child: const Icon(Icons.remove),
                 ),
-                Text('${state.counterValue}',style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+                Text('${state.counterValue}', style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 40,
+                    color: Colors.grey),),
                 FloatingActionButton(
                   onPressed: () {
                     counter.increment();

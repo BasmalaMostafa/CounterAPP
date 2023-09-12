@@ -8,7 +8,7 @@ class CounterCubit extends Cubit<CounterState> {
 
   static CounterCubit get(context) => BlocProvider.of(context);
 
-  void increment() => emit(CounterState(counterValue: state.counterValue + 1));
+  void increment() => emit(CounterState(counterValue: state.counterValue + 1,incremented: true));
 
-  void decrement() => emit(CounterState(counterValue: state.counterValue - 1));
+  void decrement() => emit(CounterState(counterValue: state.counterValue - 1,incremented: false));
 }
