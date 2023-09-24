@@ -1,5 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:counterapp/manager/counter_cubit.dart';
+import 'package:counterapp/Logic/manager/CounterCubit/counter_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

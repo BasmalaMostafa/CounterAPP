@@ -53,5 +53,5 @@ class FontSizes{
 class SizeBox{
   const SizeBox();
 
-  final separator = 30.0;
+  final separator = 20.0;
 }
