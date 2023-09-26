@@ -1,11 +1,10 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 part 'settings_state.dart';
 
-class SettingsCubit extends Cubit<SettingsState> {
+class SettingsCubit extends HydratedCubit<SettingsState> {
   SettingsCubit() : super(
       const SettingsState(
       appNotifications: false,
@@ -19,5 +18,22 @@ class SettingsCubit extends Cubit<SettingsState> {
 
   void notifyEmail(bool value){
     emit(state.copyWith(emailNotifications: value));
+  }
+
+  @override
+  SettingsState? fromJson(Map<String, dynamic> json) {
+    return SettingsState.fromMap(json);
+  }
+
+  @override
+  Map<String, dynamic>? toJson(SettingsState state) {
+    return state.toMap();
+  }
+
+  @override
+  void onChange(Change<SettingsState> change) {
+    // TODO: implement onChange
+    print(change);
+    super.onChange(change);
   }
 }

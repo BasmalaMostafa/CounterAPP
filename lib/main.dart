@@ -1,15 +1,26 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:counterapp/Logic/manager/InternetCubit/internet_cubit.dart';
 import 'package:counterapp/Logic/manager/SettingsCubit/settings_cubit.dart';
+import 'package:counterapp/Utility/bloc_observer.dart';
 import 'package:counterapp/presentation/views/counter_screen.dart';
 import 'package:counterapp/presentation/views/settings_screen.dart';
 import 'package:counterapp/shared/Components/contants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'Logic/manager/CounterCubit/counter_cubit.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();      //to call native code
+
+  HydratedBloc.storage =await HydratedStorage.build(
+      storageDirectory: await getApplicationDocumentsDirectory()       //native code
+  );
+
+  Bloc.observer = AppBlocObserver();
+
   runApp(MyApp());
 }
 
@@ -34,6 +45,7 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<SettingsCubit>(
           create: (context) => SettingsCubit(),
+          //lazy: false,    //default is true (created when the app needs it and vice versa)
         ),
       ],
       //the closest navigator instance
