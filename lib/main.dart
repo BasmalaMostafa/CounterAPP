@@ -11,6 +11,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'Logic/manager/CounterCubit/counter_cubit.dart';
+import 'Repositories/internet_repo_impl.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();      //to call native code
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
           create: (context) => CounterCubit(),
         ),
         BlocProvider<InternetCubit>(
-          create: (context) => InternetCubit(connectivity: Connectivity()),
+          create: (context) => InternetCubit(connectivity: Connectivity(), InternetPlugin()),
         ),
         BlocProvider<SettingsCubit>(
           create: (context) => SettingsCubit(),

@@ -2,4 +2,5 @@
 enum ConnectionType{
   wifi,
   mobileData,
+  none
 }
